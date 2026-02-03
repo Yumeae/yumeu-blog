@@ -11,16 +11,16 @@ import WriteButtons from '@/app/(home)/write-buttons'
 import LikePosition from './like-position'
 import HatCard from './hat-card'
 import BeianCard from './beian-card'
+import SearchCard from '@/app/(home)/search-card'
+import QuickLinksCard from '@/app/(home)/quick-links-card'
 import { useSize } from '@/hooks/use-size'
 import { motion } from 'motion/react'
 import { useLayoutEditStore } from './stores/layout-edit-store'
 import { useConfigStore } from './stores/config-store'
 import { toast } from 'sonner'
 import ConfigDialog from './config-dialog/index'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import SnowfallBackground from '@/layout/backgrounds/snowfall'
-import Link from 'next/link'
-import { Search, BookOpen, FolderTree, Code2, Calendar } from 'lucide-react'
 
 export default function Home() {
 	const { maxSM } = useSize()
@@ -28,8 +28,6 @@ export default function Home() {
 	const editing = useLayoutEditStore(state => state.editing)
 	const saveEditing = useLayoutEditStore(state => state.saveEditing)
 	const cancelEditing = useLayoutEditStore(state => state.cancelEditing)
-	const [currentTime, setCurrentTime] = useState(new Date())
-	const [searchQuery, setSearchQuery] = useState('')
 
 	const handleSave = () => {
 		saveEditing()
@@ -49,33 +47,11 @@ export default function Home() {
 			}
 		}
 
-		const updateTime = () => setCurrentTime(new Date())
-
 		window.addEventListener('keydown', handleKeyDown)
-		const timeInterval = setInterval(updateTime, 1000)
 		return () => {
 			window.removeEventListener('keydown', handleKeyDown)
-			clearInterval(timeInterval)
 		}
 	}, [setConfigDialogOpen])
-
-	const hours = currentTime.getHours().toString().padStart(2, '0')
-	const minutes = currentTime.getMinutes().toString().padStart(2, '0')
-	const timeString = `${hours}:${minutes}`
-
-	const handleSearch = (e: React.FormEvent) => {
-		e.preventDefault()
-		if (searchQuery.trim()) {
-			window.open(`https://cn.bing.com/search?q=${encodeURIComponent(searchQuery)}`, '_blank')
-		}
-	}
-
-	const quickLinks = [
-		{ icon: BookOpen, label: '博客', href: '/blog', color: 'bg-blue-500' },
-		{ icon: FolderTree, label: '项目', href: '/projects', color: 'bg-purple-500' },
-		{ icon: Code2, label: '代码片段', href: '/snippets', color: 'bg-green-500' },
-		{ icon: Calendar, label: '关于', href: '/about', color: 'bg-orange-500' }
-	]
 
 	return (
 		<>
@@ -103,49 +79,11 @@ export default function Home() {
 			)}
 
 			<div className='min-h-screen w-full'>
-				<div className='flex flex-col items-center justify-center space-y-12 px-4 py-12 max-md:space-y-8'>
-					<div className='text-center'>
-						<h1 className='text-8xl font-bold tracking-tight md:text-9xl lg:text-[160px]'>{timeString}</h1>
-						<p className='mt-4 text-2xl text-gray-600 md:text-3xl lg:text-4xl'>
-							{currentTime.toLocaleDateString('zh-CN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-						</p>
-					</div>
-
-					<form onSubmit={handleSearch} className='w-full max-w-3xl'>
-						<div className='relative'>
-							<Search className='absolute left-6 top-1/2 h-7 w-7 -translate-y-1/2 text-gray-400' />
-							<input
-								type='text'
-								value={searchQuery}
-								onChange={e => setSearchQuery(e.target.value)}
-								placeholder='搜索 Bing...'
-								className='w-full rounded-3xl border-0 bg-white/80 px-6 py-5 pl-16 text-xl shadow-lg backdrop-blur-sm outline-none transition-all focus:scale-[1.02] focus:shadow-xl dark:bg-gray-800/80 max-md:py-4 max-md:pl-14 max-md:text-lg'
-								autoFocus
-							/>
-						</div>
-					</form>
-
-					<div className='flex flex-wrap justify-center gap-5 max-md:gap-4'>
-						{quickLinks.map((link, index) => (
-							<Link
-								key={index}
-								href={link.href}
-								className='flex items-center gap-3 rounded-2xl bg-white/80 px-8 py-5 shadow-lg backdrop-blur-sm transition-all hover:scale-105 hover:shadow-xl dark:bg-gray-800/80 max-md:px-6 max-md:py-4'>
-								<div className={`rounded-xl p-3 ${link.color}`}>
-									<link.icon className='h-7 w-7 text-white max-md:h-6 max-md:w-6' />
-								</div>
-								<span className='text-xl font-medium max-md:text-lg'>{link.label}</span>
-							</Link>
-						))}
-					</div>
-
-					<div className='mt-8'>
-						{cardStyles.hiCard?.enabled !== false && <HiCard />}
-					</div>
-
-					<div className='flex flex-wrap items-center justify-center gap-4 max-sm:flex-col'>
-						{cardStyles.socialButtons?.enabled !== false && <SocialButtons />}
-					</div>
+				<div className='flex flex-col items-center justify-center space-y-8 px-4 py-12 max-md:space-y-6'>
+					{cardStyles.searchCard?.enabled !== false && <SearchCard />}
+					{cardStyles.quickLinksCard?.enabled !== false && <QuickLinksCard />}
+					{cardStyles.hiCard?.enabled !== false && <HiCard />}
+					{cardStyles.socialButtons?.enabled !== false && <SocialButtons />}
 				</div>
 
 				<div className='mx-auto max-w-6xl px-4 py-8'>

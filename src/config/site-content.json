@@ -14,14 +14,7 @@
 		"colorCard": "#ffffff66",
 		"colorArticle": "#ffffffcc"
 	},
-	"backgroundColors": [
-		"#FCC841",
-		"#DFEFFC",
-		"#DEDE92",
-		"#DE4331",
-		"#FE9750",
-		"#FCC841"
-	],
+	"backgroundColors": ["#FCC841", "#DFEFFC", "#DEDE92", "#DE4331", "#FE9750", "#FCC841"],
 	"artImages": [
 		{
 			"id": "cat",
@@ -74,5 +67,31 @@
 	"beian": {
 		"text": "",
 		"link": ""
-	}
+	},
+	"quickLinks": [
+		{
+			"icon": "BookOpen",
+			"label": "博客",
+			"href": "/blog",
+			"color": "bg-blue-500"
+		},
+		{
+			"icon": "FolderTree",
+			"label": "项目",
+			"href": "/projects",
+			"color": "bg-purple-500"
+		},
+		{
+			"icon": "Code2",
+			"label": "代码片段",
+			"href": "/snippets",
+			"color": "bg-green-500"
+		},
+		{
+			"icon": "Calendar",
+			"label": "关于",
+			"href": "/about",
+			"color": "bg-orange-500"
+		}
+	]
 }
