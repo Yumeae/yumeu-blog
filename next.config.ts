@@ -10,7 +10,8 @@ const nextConfig: NextConfig = {
 		ignoreBuildErrors: true
 	},
 	experimental: {
-		scrollRestoration: false
+		scrollRestoration: false,
+		allowedHosts: ['.monkeycode-ai.online']
 	},
 	turbopack: {
 		rules: {

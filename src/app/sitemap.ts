@@ -1,8 +1,20 @@
 import { MetadataRoute } from 'next'
 import blogIndex from '@/../public/blogs/index.json'
 import type { BlogIndexItem } from '@/app/blog/types'
+import { getCloudflareEnv } from '@/lib/cloudflare-env'
+import { getPostsPayload, type PostSummary } from '@/lib/posts-repository'
 
-export const dynamic = 'force-static'
+export const dynamic = 'force-dynamic'
+
+const mapPost = (post: PostSummary): BlogIndexItem => ({
+	slug: post.slug,
+	title: post.title || post.slug,
+	summary: post.summary,
+	tags: post.tags || [],
+	date: post.publishedAt || post.updatedAt,
+	cover: post.heroImageUrl,
+	hidden: post.status !== 'published'
+})
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	// 域名配置：
@@ -14,6 +26,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	console.log(`[Sitemap] Generating for: ${baseUrl}`)
 
 	let posts: BlogIndexItem[] = blogIndex
+	try {
+		const env = getCloudflareEnv()
+		const payload = await getPostsPayload(env)
+		posts = payload.items.filter(item => item.status === 'published').map(mapPost)
+	} catch (error) {
+		console.warn('[Sitemap] 使用静态回退数据', error)
+	}
 
 	const postEntries: MetadataRoute.Sitemap = posts.map(post => ({
 		url: `${baseUrl}/blog/${post.slug}`,

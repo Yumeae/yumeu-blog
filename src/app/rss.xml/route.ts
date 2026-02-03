@@ -1,17 +1,13 @@
-import fs from 'node:fs'
-import path from 'node:path'
-
 import siteContent from '@/config/site-content.json'
-import blogIndex from '@/../public/blogs/index.json'
 import type { BlogIndexItem } from '@/app/blog/types'
+import { getCloudflareEnv } from '@/lib/cloudflare-env'
+import { getPostsPayload, type PostSummary } from '@/lib/posts-repository'
+import type { NextRequest } from 'next/server'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.yysuni.com'
 const FEED_PATH = '/rss.xml'
 const SITE_ORIGIN = SITE_URL.replace(/\/$/, '')
 const FEED_URL = `${SITE_ORIGIN}${FEED_PATH}`
-const PUBLIC_DIR = path.join(process.cwd(), 'public')
-
-const blogs = blogIndex as BlogIndexItem[]
 
 const escapeXml = (value: string): string =>
 	value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&apos;')
@@ -40,26 +36,7 @@ const buildEnclosure = (cover?: string): string | null => {
 	const absoluteUrl = /^https?:\/\//.test(cover) ? cover : `${SITE_ORIGIN}${cover}`
 	const type = getMimeTypeFromUrl(absoluteUrl)
 	if (!type) return null
-
-	let length: number | null = null
-
-	if (!/^https?:\/\//.test(cover)) {
-		const filePath = path.join(PUBLIC_DIR, cover.replace(/^\/+/, ''))
-		try {
-			const stat = fs.statSync(filePath)
-			if (stat.isFile()) {
-				length = stat.size
-			}
-		} catch {
-			length = null
-		}
-	}
-
-	if (length === null) {
-		return null
-	}
-
-	return `<enclosure url="${escapeXml(absoluteUrl)}" type="${type}" length="${length}" />`
+	return `<enclosure url="${escapeXml(absoluteUrl)}" type="${type}" />`
 }
 
 const serializeItem = (item: BlogIndexItem): string => {
@@ -86,13 +63,24 @@ const serializeItem = (item: BlogIndexItem): string => {
 		</item>`.trim()
 }
 
-export const dynamic = 'force-static'
-export const revalidate = false
+export const runtime = 'edge'
 
-export function GET(): Response {
+const mapPostToBlogIndex = (post: PostSummary): BlogIndexItem => ({
+	slug: post.slug,
+	title: post.title || post.slug,
+	summary: post.summary,
+	cover: post.heroImageUrl,
+	tags: post.tags || [],
+	date: post.publishedAt || post.updatedAt,
+	hidden: post.status !== 'published'
+})
+
+export async function GET(request: NextRequest): Promise<Response> {
 	const title = siteContent.meta?.title || '2025 Blog'
 	const description = siteContent.meta?.description || 'Latest updates from 2025 Blog'
-
+	const env = getCloudflareEnv(request)
+	const payload = await getPostsPayload(env)
+	const blogs = payload.items.filter(item => item.status === 'published').map(mapPostToBlogIndex)
 	const items = blogs
 		.filter(item => item?.slug)
 		.map(serializeItem)

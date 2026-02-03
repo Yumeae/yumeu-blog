@@ -3,12 +3,12 @@ name = "2025-blog-public"
 compatibility_date = "2025-03-25"
 compatibility_flags = ["nodejs_compat"]
 
-[assets]
-directory = ".open-next/assets"
-binding = "ASSETS"
-
-[build]
-command = "pnpm run build:cf"
+[vars]
+ACCESS_AUD = ""
+ACCESS_TEAM_DOMAIN = ""
+ACCESS_EMAIL_ALLOWLIST = ""
+MEDIA_PUBLIC_BASE_URL = ""
+MEDIA_R2_PREFIX = "media"
 
 [observability]
 [observability.logs]
@@ -19,3 +19,24 @@ head_sampling_rate = 1
 invocation_logs = true
 # 持久化日志到磁盘（本地开发时有用）
 persist = true
+
+[[kv_namespaces]]
+binding = "CONTENT_KV"
+id = ""
+preview_id = ""
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = ""
+preview_bucket_name = ""
+
+[[analytics_engine_datasets]]
+binding = "WORKERS_ANALYTICS"
+dataset = "astro_blog_events"
+
+[assets]
+directory = ".open-next/assets"
+binding = "ASSETS"
+
+[build]
+command = "pnpm run build:cf"

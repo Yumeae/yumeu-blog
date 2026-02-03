@@ -6,17 +6,31 @@ import { CARD_SPACING } from '@/consts'
 import dayjs from 'dayjs'
 import Link from 'next/link'
 import { HomeDraggableLayer } from './home-draggable-layer'
+import { useEffect, useRef } from 'react'
 
 export default function ArticleCard() {
 	const center = useCenterStore()
 	const { cardStyles, siteContent } = useConfigStore()
-	const { blog, loading } = useLatestBlog()
+	const { blog, loading, stale, versionTimestamp, requestRefresh } = useLatestBlog()
 	const styles = cardStyles.articleCard
 	const hiCardStyles = cardStyles.hiCard
 	const socialButtonsStyles = cardStyles.socialButtons
 
 	const x = styles.offsetX !== null ? center.x + styles.offsetX : center.x + hiCardStyles.width / 2 - socialButtonsStyles.width - CARD_SPACING - styles.width
 	const y = styles.offsetY !== null ? center.y + styles.offsetY : center.y + hiCardStyles.height / 2 + CARD_SPACING
+	const requestedVersionRef = useRef<number | null>(null)
+
+	useEffect(() => {
+		if (!stale) return
+		if (requestedVersionRef.current === versionTimestamp) return
+		requestedVersionRef.current = versionTimestamp
+		requestRefresh()
+	}, [stale, versionTimestamp, requestRefresh])
+
+	const handleManualRefresh = () => {
+		requestedVersionRef.current = versionTimestamp
+		requestRefresh()
+	}
 
 	return (
 		<HomeDraggableLayer cardKey='articleCard' x={x} y={y} width={styles.width} height={styles.height}>
@@ -32,7 +46,17 @@ export default function ArticleCard() {
 					</>
 				)}
 
-				<h2 className='text-secondary text-sm'>最新文章</h2>
+				<div className='flex items-center gap-2'>
+					<h2 className='text-secondary text-sm'>最新文章</h2>
+					{stale && (
+						<button
+							type='button'
+							onClick={handleManualRefresh}
+							className='text-amber-700 bg-amber-50/80 border border-amber-200 rounded-full px-2 py-0.5 text-[10px] font-medium hover:bg-amber-100 transition-colors'>
+							内容过期，刷新中
+						</button>
+					)}
+				</div>
 
 				{loading ? (
 					<div className='flex h-[60px] items-center justify-center'>
