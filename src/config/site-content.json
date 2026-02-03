@@ -1,8 +1,8 @@
 {
 	"meta": {
-		"title": "YYsuni",
-		"description": "YYsuni 的个人博客，记录前端开发、探索、笔记。前端 UI 更新代码仓库。",
-		"username": "Suni"
+		"title": "Yumeu - New Tab",
+		"description": "一个简洁优雅的新标签页，集成了时钟、搜索和博客功能",
+		"username": "Yumeu"
 	},
 	"theme": {
 		"colorBrand": "#de4331",
