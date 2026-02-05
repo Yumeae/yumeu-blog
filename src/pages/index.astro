@@ -1,12 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Hero from '@/components/Hero';
-import ArticleList from '@/components/ArticleList';
+import Home from '@/components/Home';
 import StaleBanner from '@/components/StaleBanner';
 ---
 
 <Layout title="首页">
   <StaleBanner client:load />
-  <Hero />
-  <ArticleList />
+  <Home client:load />
 </Layout>
