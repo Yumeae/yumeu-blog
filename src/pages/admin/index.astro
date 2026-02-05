@@ -1,0 +1,11 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import CMSDashboard from '@/components/admin/CMSDashboard';
+import AccessGuard from '@/components/admin/AccessGuard';
+---
+
+<Layout title="CMS 管理后台">
+  <AccessGuard client:load>
+    <CMSDashboard client:load />
+  </AccessGuard>
+</Layout>

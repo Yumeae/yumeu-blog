@@ -1,14 +1,30 @@
-type AnalyticsPayload = Record<string, string | number | boolean | null | undefined>
+import type { Env, AnalyticsEvent } from '@/types'
 
-export async function recordAnalyticsEvent(env: CloudflareBindings, event: string, payload: AnalyticsPayload = {}) {
-	const dataset = env.WORKERS_ANALYTICS
-	if (!dataset) return
+export async function writeAnalyticsEvent(env: Env, event: AnalyticsEvent): Promise<void> {
 	try {
-		const indexes = [event]
-		const serialized = JSON.stringify({ event, ...payload, timestamp: new Date().toISOString() })
-		const blob = new TextEncoder().encode(serialized)
-		await dataset.writeDataPoint({ indexes, blobs: [blob] })
+		await env.WORKERS_ANALYTICS.writeDataPoint({
+			doubles: [],
+			blobs: [event.event],
+			indexes: [event.timestamp]
+		})
 	} catch (error) {
-		console.error('写入 Workers Analytics 失败', error)
+		console.error('Failed to write analytics event:', error)
 	}
 }
+
+export function createAnalyticsEvent(event: string, data: Record<string, unknown>): AnalyticsEvent {
+	return {
+		timestamp: Date.now(),
+		event,
+		data
+	}
+}
+
+export const AnalyticsEvents = {
+	MISSING_SLUG: 'missing-slug',
+	PUBLISH: 'publish',
+	DELETE: 'delete',
+	MEDIA_UPLOAD: 'media-upload',
+	ACCESS_DENIED: 'access-denied',
+	POST_REFRESH: 'post-refresh'
+} as const

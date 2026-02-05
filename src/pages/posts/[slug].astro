@@ -1,0 +1,14 @@
+---
+import Layout from '@/layouts/Layout.astro';
+import ArticleDetail from '@/components/ArticleDetail';
+import StaleBanner from '@/components/StaleBanner';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+---
+
+<Layout title={`文章 - ${slug}`}>
+  <StaleBanner client:load />
+  <ArticleDetail slug={slug} client:load />
+</Layout>
