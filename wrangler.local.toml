@@ -12,13 +12,13 @@ MEDIA_R2_PREFIX = "media"
 
 [[kv_namespaces]]
 binding = "CONTENT_KV"
-id = "placeholder-kv-id"
-preview_id = "placeholder-kv-preview"
+id = "test-kv-namespace"
+preview_id = "test-kv-preview"
 
 [[r2_buckets]]
 binding = "MEDIA_BUCKET"
-bucket_name = "placeholder-bucket-name"
-preview_bucket_name = "placeholder-preview-bucket"
+bucket_name = "test-media-bucket"
+preview_bucket_name = "test-media-preview"
 
 [[analytics_engine_datasets]]
 binding = "WORKERS_ANALYTICS"
