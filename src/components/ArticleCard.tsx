@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 
 export default function ArticleCard() {
@@ -17,7 +17,7 @@ export default function ArticleCard() {
 			style={{
 				width: 240,
 				height: 180,
-				marginLeft: -200,
+				marginLeft: -140,
 				marginTop: -90,
 				cursor: 'grab'
 			}}>
