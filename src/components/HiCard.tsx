@@ -1,12 +1,7 @@
-import { useCenterStore } from './use-center'
+import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
-import { useConfigStore } from './config-store'
-import HomeDraggableLayer from './home-draggable-layer'
 
 export default function HiCard() {
-	const center = useCenterStore()
-	const { cardStyles, siteContent } = useConfigStore()
-
 	function getGreeting() {
 		const hour = new Date().getHours()
 
@@ -22,29 +17,23 @@ export default function HiCard() {
 	}
 
 	const greeting = getGreeting()
-	const styles = cardStyles.hiCard
-	const username = siteContent.meta.username || 'Suni'
-
-	const x = styles.offsetX !== null ? center.x + styles.offsetX : center.x - styles.width / 2
-	const y = styles.offsetY !== null ? center.y + styles.offsetY : center.y - styles.height / 2
+	const username = 'YUMEU'
 
 	return (
-		<HomeDraggableLayer cardKey='hiCard' x={x} y={y} width={styles.width} height={styles.height}>
-			<div order={styles.order} width={styles.width} height={styles.height} x={x} y={y} className='card relative text-center'>
-				<img
-					src='/images/avatar.png'
-					alt='Avatar'
-					className='mx-auto rounded-full'
-					style={{ width: 120, height: 120, boxShadow: '0 16px 32px -5px #E2D9CE' }}
-				/>
-				<h1 className='mt-3 text-2xl' style={{ fontFamily: 'var(--font-averia)' }}>
-					{greeting} <br /> I'm{' '}
-					<span className='text-linear' style={{ fontSize: '32px' }}>
-						{username}
-					</span>{' '}
-					, Nice to <br /> meet you!
-				</h1>
-			</div>
-		</HomeDraggableLayer>
+		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			animate={{ opacity: 1, y: 0 }}
+			transition={{ duration: 0.6 }}
+			className='card absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform p-6 text-center'
+			style={{ width: 280, height: 280 }}>
+			<img src='/images/avatar.png' alt='Avatar' className='mx-auto rounded-full' style={{ width: 120, height: 120, boxShadow: '0 16px 32px -5px #E2D9CE' }} />
+			<h1 className='mt-4 text-2xl' style={{ fontFamily: 'var(--font-averia)' }}>
+				{greeting} <br /> I'm{' '}
+				<span className='text-linear' style={{ fontSize: '32px' }}>
+					{username}
+				</span>{' '}
+				, Nice to <br /> meet you!
+			</h1>
+		</motion.div>
 	)
 }

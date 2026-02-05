@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react'
+import { motion } from 'motion/react'
 
 interface Props {
-	children: ReactNode
+	children: React.ReactNode
 	className?: string
 	delay?: number
 }
