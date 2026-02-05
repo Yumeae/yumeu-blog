@@ -1,32 +1,98 @@
 ---
 import Layout from '@/layouts/MainLayout.astro';
-import Navbar from '@/components/Navbar';
+import IslandNav from '@/components/IslandNav';
 ---
 
-<Layout title="关于 - 我的博客">
-  <Navbar client:load />
-  <main className="pt-20">
-    <div class="container mx-auto px-4 py-16">
-      <div class="max-w-3xl mx-auto">
-        <h1 class="mb-8 text-4xl font-bold">关于我</h1>
+<Layout title="关于 - YUMEU">
+  <IslandNav client:load />
+  <main class="pt-24 px-4">
+    <div class="max-w-4xl mx-auto py-12">
+      <h1 class="mb-8 text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        关于我
+      </h1>
+      
+      <div class="grid gap-8 md:grid-cols-2 mb-12">
         <div class="card p-8">
-          <p class="mb-4 text-lg text-gray-700">
-            欢迎来到我的博客！这是一个使用 Astro + Cloudflare 构建的现代化博客系统。
+          <h2 class="mb-4 text-2xl font-bold">个人简介</h2>
+          <p class="text-gray-700 leading-relaxed">
+            欢迎来到我的博客！我是 YUMEU，一个热爱技术和分享的开发者。
+            在这个博客里，我会记录我的学习历程、分享技术心得、展示项目成果。
+            希望我的文章能够对你有所帮助，也期待与大家交流学习。
           </p>
-          <p class="mb-4 text-gray-600">
-            在这里，我会分享技术心得、学习笔记和项目经验。希望我的文章能够对你有所帮助。
+        </div>
+        
+        <div class="card p-8">
+          <h2 class="mb-4 text-2xl font-bold">博客理念</h2>
+          <p class="text-gray-700 leading-relaxed">
+            本博客使用 Astro + Cloudflare 构建，追求极致的性能和简洁的设计。
+            相信技术应该服务于人，而不是让人为技术所累。
+            致力于用通俗易懂的语言解释复杂的概念。
           </p>
-          <h2 class="mb-4 text-2xl font-bold">技术栈</h2>
-          <ul class="mb-4 space-y-2 text-gray-600">
-            <li>• 前端：Astro 5 + React 19</li>
-            <li>• 部署：Cloudflare Pages + Workers</li>
-            <li>• 数据：Cloudflare KV + R2</li>
-            <li>• 样式：Tailwind CSS</li>
-          </ul>
-          <h2 class="mb-4 text-2xl font-bold">联系方式</h2>
-          <p class="text-gray-600">
-            如果你有任何问题或建议，欢迎通过以下方式联系我：
-          </p>
+        </div>
+      </div>
+
+      <div class="card p-8 mb-12">
+        <h2 class="mb-6 text-3xl font-bold">技术栈</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          <div>
+            <h3 class="mb-3 text-xl font-semibold text-purple-600">前端框架</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• Astro 5 - 现代静态站点生成器</li>
+              <li>• React 19 - UI 组件库</li>
+              <li>• TypeScript - 类型安全</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="mb-3 text-xl font-semibold text-blue-600">基础设施</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• Cloudflare Pages - 全球分发</li>
+              <li>• Cloudflare Workers - Edge 计算</li>
+              <li>• KV + R2 - 数据存储</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="mb-3 text-xl font-semibold text-pink-600">样式方案</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• Tailwind CSS - 原子化 CSS</li>
+              <li>• Motion - 流畅动画</li>
+              <li>• 响应式设计 - 移动优先</li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="mb-3 text-xl font-semibold text-green-600">开发工具</h3>
+            <ul class="space-y-2 text-gray-700">
+              <li>• pnpm - 快速包管理器</li>
+              <li>• TypeScript - 类型检查</li>
+              <li>• Git - 版本控制</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="card p-8">
+        <h2 class="mb-6 text-3xl font-bold">联系方式</h2>
+        <div class="grid gap-4 md:grid-cols-3">
+          <a href="https://github.com" class="flex items-center gap-3 p-4 rounded-xl hover:bg-gray-100/50 transition-colors">
+            <span class="text-3xl">💻</span>
+            <div>
+              <div class="font-semibold">GitHub</div>
+              <div class="text-sm text-gray-600">查看我的代码</div>
+            </div>
+          </a>
+          <a href="mailto:hello@yumeu.com" class="flex items-center gap-3 p-4 rounded-xl hover:bg-gray-100/50 transition-colors">
+            <span class="text-3xl">✉️</span>
+            <div>
+              <div class="font-semibold">Email</div>
+              <div class="text-sm text-gray-600">发送邮件给我</div>
+            </div>
+          </a>
+          <div class="flex items-center gap-3 p-4 rounded-xl">
+            <span class="text-3xl">🌐</span>
+            <div>
+              <div class="font-semibold">Social</div>
+              <div class="text-sm text-gray-600">社交媒体</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

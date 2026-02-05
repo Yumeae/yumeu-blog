@@ -1,16 +1,16 @@
 ---
 import Layout from '@/layouts/MainLayout.astro';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import PostGrid from '@/components/PostGrid';
-import FeatureSection from '@/components/FeatureSection';
+import IslandNav from '@/components/IslandNav';
+import WelcomeSection from '@/components/WelcomeSection';
+import CardsSection from '@/components/CardsSection';
+import StatsSection from '@/components/StatsSection';
 ---
 
-<Layout title="首页 - 我的博客">
-  <Navbar client:load />
-  <main>
-    <Hero client:load />
-    <PostGrid client:load />
-    <FeatureSection client:load />
+<Layout title="YUMEU - 个人博客">
+  <IslandNav client:load />
+  <main class="pt-24">
+    <WelcomeSection client:load />
+    <CardsSection client:load />
+    <StatsSection client:load />
   </main>
 </Layout>

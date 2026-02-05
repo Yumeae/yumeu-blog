@@ -1,12 +1,17 @@
 ---
 import Layout from '@/layouts/MainLayout.astro';
-import Navbar from '@/components/Navbar';
+import IslandNav from '@/components/IslandNav';
 import PostGrid from '@/components/PostGrid';
 ---
 
-<Layout title="文章 - 我的博客">
-  <Navbar client:load />
-  <main className="pt-20">
-    <PostGrid client:load />
+<Layout title="文章 - YUMEU">
+  <IslandNav client:load />
+  <main class="pt-24 px-4">
+    <div class="max-w-7xl mx-auto py-12">
+      <h1 class="mb-8 text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+        文章列表
+      </h1>
+      <PostGrid client:load />
+    </div>
   </main>
 </Layout>
