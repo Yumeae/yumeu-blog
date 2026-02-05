@@ -18,6 +18,9 @@ const config: AstroConfig = {
 	}),
 	output: 'static',
 	vite: {
+		server: {
+			allowedHosts: ['.monkeycode-ai.online']
+		},
 		build: {
 			rollupOptions: {
 				output: {
