@@ -1,16 +1,12 @@
 ---
 import Layout from '@/layouts/MainLayout.astro';
 import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
 import PostGrid from '@/components/PostGrid';
-import FeatureSection from '@/components/FeatureSection';
 ---
 
-<Layout title="首页 - 我的博客">
+<Layout title="文章 - 我的博客">
   <Navbar client:load />
-  <main>
-    <Hero client:load />
+  <main className="pt-20">
     <PostGrid client:load />
-    <FeatureSection client:load />
   </main>
 </Layout>
