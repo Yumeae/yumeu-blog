@@ -6,22 +6,22 @@
 @import './article.css';
 
 :root {
-	--foreground-rgb: 0, 0, 0;
-	--background-start-rgb: 214, 219, 220;
+	--foreground-rgb: 30, 30, 30;
+	--background-start-rgb: 250, 250, 252;
 	--background-end-rgb: 255, 255, 255;
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
-		--background-end-rgb: 0, 0, 0;
+		--foreground-rgb: 245, 245, 245;
+		--background-start-rgb: 15, 15, 20;
+		--background-end-rgb: 20, 20, 25;
 	}
 }
 
 html {
 	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+	background: linear-gradient(135deg, rgb(var(--background-start-rgb)) 0%, rgb(var(--background-end-rgb)) 100%);
 	scroll-behavior: smooth;
 }
 
@@ -106,9 +106,11 @@ button {
 	padding: 1.5rem;
 	border: 1px solid var(--color-border);
 	box-shadow:
-		0 40px 50px -32px rgba(0, 0, 0, 0.05),
-		inset 0 0 20 rgba(255, 255, 255, 0.25);
-	backdrop-filter: blur(4px);
+		0 20px 40px -15px rgba(139, 92, 246, 0.15),
+		0 8px 16px -8px rgba(99, 102, 241, 0.1),
+		inset 0 0 20 rgba(255, 255, 255, 0.6);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
 }
 
 @supports (corner-shape: squircle) {
@@ -130,19 +132,19 @@ button {
 }
 
 .text-linear {
-	background: linear-gradient(to right bottom, #0003 0%, #aaa1), linear-gradient(to right bottom, var(--color-brand) 40%, var(--color-brand-secondary));
+	background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-secondary) 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
 }
 
 .bg-linear {
-	background: linear-gradient(to right bottom, var(--color-brand) 0%, var(--color-brand-secondary));
+	background: linear-gradient(135deg, var(--color-brand) 0%, var(--color-brand-secondary) 100%);
 	color: white;
 }
 
 .shadow {
-	box-shadow: 0 40px 50px -32px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 20px 40px -15px rgba(139, 92, 246, 0.15);
 }
 
 .btn-rounded {
@@ -167,7 +169,7 @@ button {
 	font-size: 0.875rem;
 	font-weight: 500;
 	color: white;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
 }
 
 @supports (corner-shape: squircle) {
@@ -212,13 +214,13 @@ button {
 
 body {
 	color: rgb(var(--foreground-rgb));
-	background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+	background: linear-gradient(135deg, rgb(var(--background-start-rgb)) 0%, rgb(var(--background-end-rgb)) 100%);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--foreground-rgb: 255, 255, 255;
-		--background-start-rgb: 0, 0, 0;
-		--background-end-rgb: 0, 0, 0;
+		--foreground-rgb: 245, 245, 245;
+		--background-start-rgb: 15, 15, 20;
+		--background-end-rgb: 20, 20, 25;
 	}
 }

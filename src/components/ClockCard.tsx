@@ -15,22 +15,32 @@ export default function ClockCard() {
 
 	return (
 		<motion.div
-			initial={{ opacity: 0, y: 20 }}
+			initial={{ opacity: 0, y: -30 }}
 			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.6 }}
+			transition={{ duration: 0.6, delay: 0.15 }}
 			className='card absolute left-1/2 top-1/2 p-6'
 			style={{
-				width: 160,
-				height: 160,
-				marginLeft: 80,
-				marginTop: -180,
+				width: 180,
+				height: 180,
+				marginLeft: 120,
+				marginTop: -200,
 				cursor: 'grab'
 			}}>
-			<div className='mb-3 flex items-center justify-center'>
-				<div className='text-3xl'>⏰</div>
+			<div className='mb-4 flex items-center justify-center'>
+				<motion.div
+					className='text-4xl'
+					animate={{ rotate: [0, 360] }}
+					transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}>
+					⏰
+				</motion.div>
 			</div>
-			<div className='text-center text-4xl font-bold' style={{ fontFamily: 'monospace' }}>
-				{hours}:{minutes}:{seconds}
+			<div className='space-y-1 text-center'>
+				<div className='text-4xl font-bold' style={{ fontFamily: 'monospace', letterSpacing: '2px' }}>
+					{hours}:{minutes}
+				</div>
+				<div className='text-lg text-gray-500' style={{ fontFamily: 'monospace' }}>
+					{seconds}
+				</div>
 			</div>
 		</motion.div>
 	)
