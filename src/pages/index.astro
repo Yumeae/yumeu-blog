@@ -1,16 +1,8 @@
 ---
 import Layout from '@/layouts/MainLayout.astro';
-import IslandNav from '@/components/IslandNav';
-import WelcomeSection from '@/components/WelcomeSection';
-import CardsSection from '@/components/CardsSection';
-import StatsSection from '@/components/StatsSection';
+import HomeCards from '@/components/HomeCards';
 ---
 
 <Layout title="YUMEU - 个人博客">
-  <IslandNav client:load />
-  <main class="pt-24">
-    <WelcomeSection client:load />
-    <CardsSection client:load />
-    <StatsSection client:load />
-  </main>
+  <HomeCards client:load />
 </Layout>
