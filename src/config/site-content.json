@@ -1,8 +1,8 @@
 {
 	"meta": {
-		"title": "YYsuni",
-		"description": "YYsuni 的个人博客，记录前端开发、探索、笔记。前端 UI 更新代码仓库。",
-		"username": "Suni"
+		"title": "Yumeu - New Tab",
+		"description": "一个简洁优雅的新标签页，集成了时钟、搜索和博客功能",
+		"username": "Yumeu"
 	},
 	"theme": {
 		"colorBrand": "#de4331",
@@ -14,14 +14,7 @@
 		"colorCard": "#ffffff66",
 		"colorArticle": "#ffffffcc"
 	},
-	"backgroundColors": [
-		"#FCC841",
-		"#DFEFFC",
-		"#DEDE92",
-		"#DE4331",
-		"#FE9750",
-		"#FCC841"
-	],
+	"backgroundColors": ["#FCC841", "#DFEFFC", "#DEDE92", "#DE4331", "#FE9750", "#FCC841"],
 	"artImages": [
 		{
 			"id": "cat",
@@ -74,5 +67,31 @@
 	"beian": {
 		"text": "",
 		"link": ""
-	}
+	},
+	"quickLinks": [
+		{
+			"icon": "BookOpen",
+			"label": "博客",
+			"href": "/blog",
+			"color": "bg-blue-500"
+		},
+		{
+			"icon": "FolderTree",
+			"label": "项目",
+			"href": "/projects",
+			"color": "bg-purple-500"
+		},
+		{
+			"icon": "Code2",
+			"label": "代码片段",
+			"href": "/snippets",
+			"color": "bg-green-500"
+		},
+		{
+			"icon": "Calendar",
+			"label": "关于",
+			"href": "/about",
+			"color": "bg-orange-500"
+		}
+	]
 }

@@ -11,6 +11,8 @@ import WriteButtons from '@/app/(home)/write-buttons'
 import LikePosition from './like-position'
 import HatCard from './hat-card'
 import BeianCard from './beian-card'
+import SearchCard from '@/app/(home)/search-card'
+import QuickLinksCard from '@/app/(home)/quick-links-card'
 import { useSize } from '@/hooks/use-size'
 import { motion } from 'motion/react'
 import { useLayoutEditStore } from './stores/layout-edit-store'
@@ -76,18 +78,27 @@ export default function Home() {
 				</div>
 			)}
 
-			<div className='max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-6 max-sm:pt-28 max-sm:pb-20'>
-				{cardStyles.artCard?.enabled !== false && <ArtCard />}
-				{cardStyles.hiCard?.enabled !== false && <HiCard />}
-				{!maxSM && cardStyles.clockCard?.enabled !== false && <ClockCard />}
-				{!maxSM && cardStyles.calendarCard?.enabled !== false && <CalendarCard />}
-				{cardStyles.socialButtons?.enabled !== false && <SocialButtons />}
-				{!maxSM && cardStyles.shareCard?.enabled !== false && <ShareCard />}
-				{cardStyles.articleCard?.enabled !== false && <AritcleCard />}
-				{!maxSM && cardStyles.writeButtons?.enabled !== false && <WriteButtons />}
-				{cardStyles.likePosition?.enabled !== false && <LikePosition />}
-				{cardStyles.hatCard?.enabled !== false && <HatCard />}
-				{cardStyles.beianCard?.enabled !== false && <BeianCard />}
+			<div className='min-h-screen w-full'>
+				<div className='flex flex-col items-center justify-center space-y-8 px-4 py-12 max-md:space-y-6'>
+					{cardStyles.searchCard?.enabled !== false && <SearchCard />}
+					{cardStyles.quickLinksCard?.enabled !== false && <QuickLinksCard />}
+					{cardStyles.hiCard?.enabled !== false && <HiCard />}
+					{cardStyles.socialButtons?.enabled !== false && <SocialButtons />}
+				</div>
+
+				<div className='mx-auto max-w-6xl px-4 py-8'>
+					<div className='max-sm:flex max-sm:flex-col max-sm:items-center max-sm:gap-6 max-sm:pt-28 max-sm:pb-20'>
+						{cardStyles.artCard?.enabled !== false && <ArtCard />}
+						{!maxSM && cardStyles.clockCard?.enabled !== false && <ClockCard />}
+						{!maxSM && cardStyles.calendarCard?.enabled !== false && <CalendarCard />}
+						{!maxSM && cardStyles.shareCard?.enabled !== false && <ShareCard />}
+						{cardStyles.articleCard?.enabled !== false && <AritcleCard />}
+						{!maxSM && cardStyles.writeButtons?.enabled !== false && <WriteButtons />}
+						{cardStyles.likePosition?.enabled !== false && <LikePosition />}
+						{cardStyles.hatCard?.enabled !== false && <HatCard />}
+						{cardStyles.beianCard?.enabled !== false && <BeianCard />}
+					</div>
+				</div>
 			</div>
 
 			{siteContent.enableChristmas && <SnowfallBackground zIndex={2} count={!maxSM ? 125 : 20} />}

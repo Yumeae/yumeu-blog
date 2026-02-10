@@ -11,15 +11,15 @@ const {
 } = siteContent
 
 export const metadata: Metadata = {
-	title,
-	description,
+	title: 'YYsuni - New Tab',
+	description: '一个简洁优雅的新标签页，集成了时钟、搜索和博客功能',
 	openGraph: {
-		title,
-		description
+		title: 'YYsuni - New Tab',
+		description: '一个简洁优雅的新标签页，集成了时钟、搜索和博客功能'
 	},
 	twitter: {
-		title,
-		description
+		title: 'YYsuni - New Tab',
+		description: '一个简洁优雅的新标签页，集成了时钟、搜索和博客功能'
 	}
 }
 
